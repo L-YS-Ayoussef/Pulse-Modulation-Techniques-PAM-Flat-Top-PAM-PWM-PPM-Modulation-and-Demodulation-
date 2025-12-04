@@ -32,28 +32,6 @@ For each technique, both **modulation** and **demodulation** are demonstrated us
 
 **Pulse Amplitude Modulation (PAM)** encodes the information in the **amplitude of periodic pulses**.
 
-Let:
-
-- \( m(t) \): message signal  
-- \( p(t) \): pulse train  
-- \( s(t) \): PAM modulated signal  
-
-**Modulation (PAM)**
-
-The PAM signal is obtained by multiplying the message signal by the pulse train:
-
-\[
-s(t) = m(t)\, p(t)
-\]
-
-**Demodulation (PAM)**
-
-At the receiver, the PAM signal is sampled/multiplied again by a suitable pulse waveform \( p(t) \) and then passed through a low-pass filter (LPF) to recover the original message:
-
-\[
-\hat{m}(t) = s(t)\, p(t) \;\xrightarrow{\text{LPF}}\; m(t)
-\]
-
 **🖼️ Figures (PAM)**  
 
 | PAM m1(t) | PAM m2(t) |
@@ -67,29 +45,6 @@ At the receiver, the PAM signal is sampled/multiplied again by a suitable pulse 
 **Concept**
 
 **Flat-Top PAM** is a variation of PAM where each pulse is **sampled and then held at a constant level** for the entire pulse duration. This produces “flat-top” pulses which make detection easier and reduce certain types of distortion.
-
-Let:
-
-- \( T_s \): sampling period  
-- \( \tau \): pulse width (hold duration)  
-
-**Modulation (Flat-Top PAM)**
-
-The sampled-and-held signal can be expressed as:
-
-\[
-s(t) = \sum_{n=-\infty}^{\infty} m(nT_s)\, \text{rect}\!\left(\frac{t - nT_s}{\tau}\right)
-\]
-
-where \( \text{rect}(\cdot) \) represents a rectangular pulse of width \( \tau \).
-
-**Demodulation (Flat-Top PAM)**
-
-Similar to regular PAM, the received signal is sampled at the correct instants and then passed through a reconstruction/low-pass filter to approximate \( m(t) \):
-
-\[
-\hat{m}(t) \approx \text{LPF}\{s(t)\}
-\]
 
 **🖼️ Figures (Flat-Top PAM)**  
 
@@ -105,29 +60,6 @@ Similar to regular PAM, the received signal is sampled at the correct instants a
 
 In **Pulse Width Modulation (PWM)**, the **width (duty cycle)** of each pulse is varied in proportion to the amplitude of the message signal, while the amplitude and position of the pulses remain fixed.
 
-Let:
-
-- \( T \): pulse period  
-- \( D(t) \): duty cycle (between 0 and 1), controlled by \( m(t) \)  
-
-**Modulation (PWM)**
-
-Conceptually, the width of each pulse is:
-
-\[
-\text{Pulse width}(t) = D(t)\, T
-\]
-
-with \( D(t) \) chosen proportional to the normalized message \( m(t) \).
-
-**Demodulation (PWM)**
-
-To recover the message, the PWM signal is averaged over each period or passed through a low-pass filter, which converts the varying duty cycle back into an analog amplitude:
-
-\[
-\hat{m}(t) \approx \text{LPF}\{s(t)\}
-\]
-
 **🖼️ Figures (PWM)**  
 
 | PWM m1(t) | PWM m2(t) |
@@ -141,32 +73,6 @@ To recover the message, the PWM signal is averaged over each period or passed th
 **Concept**
 
 In **Pulse Position Modulation (PPM)**, the **position (timing)** of each pulse within a time slot encodes the information, while the amplitude and width of the pulses remain constant.
-
-Let:
-
-- \( T \): symbol duration  
-- \( \tau(m(t)) \): time shift (position) determined by the message  
-- \( p(t) \): base pulse waveform  
-
-**Modulation (PPM)**
-
-A simple representation of the PPM signal is:
-
-\[
-s(t) = p\big(t - \tau(m(t))\big)
-\]
-
-For discrete symbols, the position can also be written as:
-
-\[
-s(t) = \sum_{k} p\big(t - kT - \tau_k\big)
-\]
-
-where \( \tau_k \) encodes the symbol sent in the \(k\)-th time slot.
-
-**Demodulation (PPM)**
-
-Demodulation is performed by accurately measuring the **arrival time** (position) of each pulse within its slot and mapping it back to the corresponding data value or symbol.
 
 **🖼️ Figures (PPM)**  
 
